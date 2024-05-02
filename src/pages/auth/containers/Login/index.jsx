@@ -197,31 +197,32 @@ export class Login extends Component {
         <Select placeholder={t('Select a region')} options={this.regions} />
       ),
     };
-    // const domainItem = {
-    //   name: 'domain',
-    //   required: true,
-    //   message: t('Please select your Domain!'),
-    //   render: () => (
-    //     <Select placeholder={t('Select a domain')} options={this.domains} />
-    //   ),
-    // };
     const domainItem = {
       name: 'domain',
       required: true,
       message: t('Please input your Domain!'),
       render: () => (
-        <div>
-          <Input placeholder={t('Domain')} />
-          <div className={styles['domain-dropdown']}>
-            {this.domains.map(domain => (
-              <div key={domain.value} className={styles['domain-option']}>
-                {domain.label}
-              </div>
-            ))}
-          </div>
-        </div>
+        <Input placeholder={t('Input a domain')} options={this.domains} />
       ),
     };
+
+    // const domainItem = {
+    //   name: 'domain',
+    //   required: true,
+    //   message: t('Please input your Domain!'),
+    //   render: () => (
+    //     <div>
+    //       <Input placeholder={t('Domain')} />
+    //       <div className={styles['domain-dropdown']}>
+    //         {this.domains.map(domain => (
+    //           <div key={domain.value} className={styles['domain-option']}>
+    //             {domain.label}
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   ),
+    // };
     const usernameItem = {
       name: 'username',
       required: true,
