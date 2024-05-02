@@ -36,7 +36,7 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        include: [root('src')],
+        include: [root('src'), root('node_modules')],
         use: ['thread-loader', 'cache-loader'],
       },
       {
