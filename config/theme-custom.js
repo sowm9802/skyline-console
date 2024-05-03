@@ -15,8 +15,10 @@
 module.exports = {
   'primary-color': '#992929',
   'link-color': '#992929',
-  'link-hover-color': '#892424',
-  'link-active-color': '#892424',
+  //'link-hover-color': '#892424',
+  //'link-active-color': '#892424',
+  'link-hover-color': '#D3D3D3',
+  'link-active-color': '#D3D3D3',
   'success-color': '#3C9E6C',
   'warning-color': '#878787',
   'error-color': '#D32F45',
