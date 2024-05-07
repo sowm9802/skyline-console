@@ -8,3 +8,6 @@ globalVariables:
   defaultLanguage: en
   supportLanguages: # use value in i18n.js
     - en
+    - zh-hans
+    - ko-kr
+    - ru
