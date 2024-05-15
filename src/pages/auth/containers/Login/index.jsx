@@ -69,13 +69,13 @@ export class Login extends Component {
   }
 
   get productName() {
-    const { product_name = { zh: t('Cloud Platform'), en: 'Cloud Platform' } } =
+    const { product_name = { zh: t('Openstack Flex'), en: 'Openstack Flex' } } =
       this.info;
     const { getLocaleShortName } = i18n;
     const language = getLocaleShortName();
     const name =
-      product_name[language] || t('Cloud Platform') || 'Cloud Platform';
-    return t('Welcome, {name}', { name });
+      product_name[language] || t('Openstack Flex') || 'Openstack Flex';
+    return t('Welcome to {name}', { name });
   }
 
   get domains() {
@@ -197,14 +197,23 @@ export class Login extends Component {
         <Select placeholder={t('Select a region')} options={this.regions} />
       ),
     };
+
+    // const domainItem = {
+    //   name: 'domain',
+    //   required: true,
+    //   message: t('Please input your Domain!'),
+    //   render: () => <Input placeholder={t('Domain')} />,
+    // };
+
     const domainItem = {
       name: 'domain',
       required: true,
       message: t('Please select your Domain!'),
       render: () => (
-        <Select placeholder={t('Select a domain')} options={this.domains} />
+         <Input placeholder={t('Select a domain')} options={this.domains} />
       ),
     };
+
     const usernameItem = {
       name: 'username',
       required: true,
