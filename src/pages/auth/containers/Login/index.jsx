@@ -36,14 +36,8 @@ export class Login extends Component {
   }
 
   componentDidMount() {
-    this.getDomains();
     this.getRegions();
     this.getSSO();
-  }
-
-  async getDomains() {
-    await this.store.fetchDomainList();
-    this.updateDefaultValue();
   }
 
   async getRegions() {
@@ -76,13 +70,6 @@ export class Login extends Component {
     const name =
       product_name[language] || t('Openstack Flex') || 'Openstack Flex';
     return t('Welcome to {name}', { name });
-  }
-
-  get domains() {
-    return (this.store.domains || []).map((it) => ({
-      label: it,
-      value: it,
-    }));
   }
 
   get regions() {
@@ -165,9 +152,6 @@ export class Login extends Component {
     if (this.regions.length === 1) {
       data.region = this.regions[0].value;
     }
-    if (this.domains.length === 1) {
-      data.domain = this.domains[0].value;
-    }
     return data;
   }
 
@@ -197,21 +181,11 @@ export class Login extends Component {
         <Select placeholder={t('Select a region')} options={this.regions} />
       ),
     };
-    // const domainItem = {
-    //   name: 'domain',
-    //   required: true,
-    //   message: t('Please select your Domain!'),
-    //   render: () => (
-    //     <Select placeholder={t('Select a domain')} options={this.domains} />
-    //   ),
-    // };
     const domainItem = {
       name: 'domain',
       required: true,
       message: t('Please input your Domain!'),
-      render: () => (
-         <Input placeholder={t('Input a domain')} options={this.domains} />
-      ),
+      render: () => <Input placeholder={t('Domain')} />,
     };
     const usernameItem = {
       name: 'username',
