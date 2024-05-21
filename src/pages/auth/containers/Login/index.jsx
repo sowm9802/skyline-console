@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import React, { Component } from 'react';
-import { Input, Button, Select, Row, Col } from 'antd';
+import { Input, Button, Select, Row, Col, AutoComplete } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { InfoCircleFilled } from '@ant-design/icons';
@@ -36,8 +36,14 @@ export class Login extends Component {
   }
 
   componentDidMount() {
+    this.getDomains();
     this.getRegions();
     this.getSSO();
+  }
+
+  async getDomains() {
+    await this.store.fetchDomainList();
+    this.updateDefaultValue();
   }
 
   async getRegions() {
@@ -70,6 +76,13 @@ export class Login extends Component {
     const name =
       product_name[language] || t('Openstack Flex') || 'Openstack Flex';
     return t('Welcome to {name}', { name });
+  }
+
+  get domains() {
+    return (this.store.domains || []).map((it) => ({
+      label: it,
+      value: it,
+    }));
   }
 
   get regions() {
@@ -152,6 +165,9 @@ export class Login extends Component {
     if (this.regions.length === 1) {
       data.region = this.regions[0].value;
     }
+    if (this.domains.length === 1) {
+      data.domain = this.domains[0].value;
+    }
     return data;
   }
 
@@ -182,11 +198,15 @@ export class Login extends Component {
       ),
     };
     const domainItem = {
-      name: 'domain',
-      required: true,
-      message: t('Please input your Domain!'),
-      render: () => <Input placeholder={t('Domain')} />,
-    };
+       name: 'domain',
+       required: true,
+       message: t('Please select your Domain!'),
+       render: () => (
+         <AutoComplete placeholder={t('Select a domain')} options={this.domains}
+         filterOption={(inputValue, option) => option && option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+        }/>
+       ),
+     };
     const usernameItem = {
       name: 'username',
       required: true,
